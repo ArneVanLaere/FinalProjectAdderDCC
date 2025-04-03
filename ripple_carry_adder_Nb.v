@@ -23,9 +23,7 @@ module ripple_carry_adder_Nb #(
             full_adder full_adder_inst (.iA(iA[i]), .iB(iB[i]), .iCarry(wCarry[i-1]), .oSum(oSum[i]), .oCarry(wCarry[i]));
         end 
     endgenerate
-
     assign oCarry = wCarry[ADDER_WIDTH-1];
-    if (i==ADDER_WIDTH-1) begin
-        assign oFinished = 1;
-    end
+
+    assign oFinished = (wCarry[ADDER_WIDTH-1] == 0 || wCarry[ADDER_WIDTH-1] == 1);
 endmodule
