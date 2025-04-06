@@ -7,8 +7,7 @@ module ripple_carry_adder_Nb #(
     input   wire [ADDER_WIDTH-1:0]  iA, iB, 
     input   wire                    iCarry,
     output  wire [ADDER_WIDTH-1:0]  oSum, 
-    output  wire                    oCarry,
-    output  wire                    oFinished
+    output  wire                    oCarry
 );
 
 	wire[ADDER_WIDTH-1:0] wCarry;
@@ -25,5 +24,4 @@ module ripple_carry_adder_Nb #(
     endgenerate
     assign oCarry = wCarry[ADDER_WIDTH-1];
 
-    assign oFinished = (wCarry[ADDER_WIDTH-1] == 0 || wCarry[ADDER_WIDTH-1] == 1);
 endmodule
