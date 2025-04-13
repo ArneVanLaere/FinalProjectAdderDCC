@@ -15,6 +15,7 @@ module mux#(
             1: r = iA;
             default: r = iB;
         endcase
+//        $display("iA: %d, iB: %d, iCarry: %d", iA, iB, iCondition);
     end
     assign oY = r;
 endmodule

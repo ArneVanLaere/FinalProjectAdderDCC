@@ -6,7 +6,7 @@ module mp_adder #(
       // if the operands you want to add have an OPERAND_WIDTH non-multiple of ADDER_WIDTH
       //   you'll have to extend them by padding them with zeroes
       parameter OPERAND_WIDTH = 512,
-      parameter ADDER_WIDTH   = 16,
+      parameter ADDER_WIDTH   = 32,
       parameter N_ITERATIONS  = OPERAND_WIDTH / ADDER_WIDTH
     )
     (
@@ -71,8 +71,8 @@ module mp_adder #(
     wire [ADDER_WIDTH-1:0]  result;
     wire                    carry_out;
 
-    carry_select #( .ADDER_WIDTH(ADDER_WIDTH) ) 
-    carry_select_inst   (
+    var_carry_select #( .ADDER_WIDTH(ADDER_WIDTH) ) 
+    var_carry_select_inst   (
         .iA( operandA ), 
         .iB( operandB ),
         .iCarry( carry_in ),
