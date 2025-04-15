@@ -36,10 +36,11 @@ module var_carry_select #(
     genvar i; // variable to control for loop
 
     generate //adders for both carry cases
+        initial $display("current block width: %d, interval: %d:%d", FIRST_BLOCK_WIDTH, FIRST_BLOCK_WIDTH-1, 0);
         for (i=1; i<NUMBER_OF_BLOCKS; i=i+1)  begin : gen_block
-            localparam current_block_width = (i==NUMBER_OF_BLOCKS-1) ? ADDER_WIDTH-(FIRST_BLOCK_WIDTH+INCREMENT_SIZE*(NUMBER_OF_BLOCKS-1)): FIRST_BLOCK_WIDTH+(i*INCREMENT_SIZE);
-            localparam upper_limit = (i==NUMBER_OF_BLOCKS-1) ? ADDER_WIDTH-1: (i+1)*FIRST_BLOCK_WIDTH+INCREMENT_SIZE*(i*(i+1)/2);
-            initial $display("current block width: %d, upper: %d", current_block_width, upper_limit);
+            localparam current_block_width = (i==NUMBER_OF_BLOCKS-1) ? ADDER_WIDTH-(i*FIRST_BLOCK_WIDTH+INCREMENT_SIZE*(i*(i-1)/2)): FIRST_BLOCK_WIDTH+(i*INCREMENT_SIZE);
+            localparam upper_limit = (i==NUMBER_OF_BLOCKS-1) ? ADDER_WIDTH: (i+1)*FIRST_BLOCK_WIDTH+INCREMENT_SIZE*(i*(i+1)/2);
+            initial $display("current block width: %d, interval: %d:%d", current_block_width, upper_limit-1, upper_limit-current_block_width);
             wire [current_block_width-1:0]  w1Sum;
             wire [current_block_width-1:0]  w0Sum;
 	
